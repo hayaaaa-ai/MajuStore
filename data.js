@@ -23,9 +23,9 @@ window.MAJU_STORE_DATA = {
   // A proposta local pode mostrá-los; proposal:false bloqueia links sem publicUseAuthorized:true.
   sellers: [
     // CONFIRMAR AUTORIZAÇÃO PARA PUBLICAÇÃO DO NÚMERO.
-    {id:'sheila',name:'Sheila',role:'Atendimento',photo:'assets/team/sheila.webp',number:'5538999835902',display:'(38) 99983-5902',message:'Olá, Sheila! Vi o site da Maju Store e gostaria de saber mais.',publicUseAuthorized:false,numberFormatConfirmed:true},
+    {id:'sheila',name:'Sheila',role:'Atendimento',photo:'assets/team/sheila.webp',photoSmall:'assets/team/sheila-320.webp',number:'5538999835902',display:'(38) 99983-5902',message:'Olá, Sheila! Vi o site da Maju Store e gostaria de saber mais.',publicUseAuthorized:false,numberFormatConfirmed:true},
     // CONFIRMAR AUTORIZAÇÃO PARA PUBLICAÇÃO DO NÚMERO.
-    {id:'duda',name:'Duda',role:'Atendimento',photo:'assets/team/duda.webp',number:'5538997446734',display:'(38) 99744-6734',message:'Olá, Duda! Vi o site da Maju Store e gostaria de saber mais.',publicUseAuthorized:false,numberFormatConfirmed:true}
+    {id:'duda',name:'Duda',role:'Atendimento',photo:'assets/team/duda.webp',photoSmall:'assets/team/duda-320.webp',number:'5538997446734',display:'(38) 99744-6734',message:'Olá, Duda! Vi o site da Maju Store e gostaria de saber mais.',publicUseAuthorized:false,numberFormatConfirmed:true}
   ],
   products: [
     {id:'shirt',name:'Camisa em tom marfim',category:'Forma leve',image:'assets/shirt.webp',description:'Um tom claro e linhas leves como ponto de partida para imaginar combinações. Esta imagem é uma referência visual demonstrativa.',available:null,demonstrative:true,tone:'cream'},

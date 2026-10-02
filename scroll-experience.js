@@ -6,7 +6,7 @@
   const lookbook=document.getElementById('lookbook');
   const editorial=document.getElementById('editorial');
   // Set enabled to false to keep the editorial chapters static.
-  const CONFIG={enabled:true,horizontalScrollVh:62,desktopWidth:1024};
+  const CONFIG={enabled:true,horizontalScrollVh:58,desktopWidth:1024};
   let enabled=CONFIG.enabled,media=null,active=null,loading=null,status='static',reason='initial';
   let state=motion.getState();
   const blocked=()=>state.userPaused||state.hidden||state.dialogOpen;
@@ -32,7 +32,7 @@
     // This displacement is navigation: pausing decoration must not hide panels.
     if(horizontal){
       lookbook.classList.add('is-horizontal');
-      gsap.to(track,{x:()=>-Math.max(0,track.scrollWidth-windowEl.clientWidth),ease:'none',scrollTrigger:{id:'maju-lookbook',trigger:lookbook,start:'top top',end:()=>`+=${innerHeight*CONFIG.horizontalScrollVh/100}`,pin:true,scrub:true,anticipatePin:1,invalidateOnRefresh:true,onUpdate(self){progressFill.style.transform=`scaleX(${self.progress})`;const index=Math.min(4,1+Math.floor(self.progress*4));if(index!==panelIndex){currentPanel.textContent=String(index).padStart(2,'0');panelIndex=index;}}}});
+      gsap.to(track,{x:()=>-Math.max(0,track.scrollWidth-windowEl.clientWidth),ease:'none',scrollTrigger:{id:'maju-lookbook',trigger:lookbook,start:'top 84px',end:()=>`+=${innerHeight*CONFIG.horizontalScrollVh/100}`,pin:true,scrub:true,anticipatePin:1,invalidateOnRefresh:true,onUpdate(self){progressFill.style.transform=`scaleX(${self.progress})`;const index=Math.min(4,1+Math.floor(self.progress*4));if(index!==panelIndex){currentPanel.textContent=String(index).padStart(2,'0');panelIndex=index;}}}});
     }
     function scrubTimeline(animation,options){
       const update=self=>{if(!blocked())animation.progress(self.progress);};
@@ -58,14 +58,16 @@
       scrubTimeline(animation,{trigger:selector,start:'top bottom',end:'top 25%'});
     });
     if(desktop){
-      const photo=gsap.fromTo('.editorial-photo>img',{yPercent:-2.5,scale:1.07},{yPercent:2.5,scale:1.07,duration:1,ease:'none',paused:true});
+      const photo=gsap.fromTo('.editorial-photo>img',{yPercent:-1.5,scale:1.04},{yPercent:1.5,scale:1.07,duration:1,ease:'none',paused:true});
       scrubTimeline(photo,{trigger:editorial,start:'top bottom',end:'bottom top'});
       const copy=gsap.fromTo('.editorial-copy h2',{y:-8},{y:8,duration:1,ease:'none',paused:true});
       scrubTimeline(copy,{trigger:editorial,start:'top bottom',end:'bottom top'});
     }
-    const about=gsap.timeline({paused:true}).fromTo('.about-monogram>span:first-child',{y:12,opacity:.75},{y:0,opacity:1,duration:.45}).fromTo('[data-about-enter]',{y:12,opacity:.8},{y:0,opacity:1,duration:.5,stagger:.1},.15).fromTo('.about-brand-line',{scaleX:0},{scaleX:1,duration:.55},.35);
+    const about=gsap.timeline({paused:true}),portrait=document.querySelector('.about-photograph img');
+    if(portrait)about.fromTo(portrait,{scale:1.025},{scale:1,duration:.65,ease:'power1.out'});
+    about.fromTo('[data-about-enter]',{y:10,opacity:.8},{y:0,opacity:1,duration:.5,stagger:.1},.15);
     ScrollTrigger.create({trigger:'#sobre',start:'top 85%',once:true,onEnter(){aboutEntered=true;if(!blocked())about.play();}});
-    // Shared hero control also pauses decorative scroll effects. No global RAF.
+    // Shared motion control pauses decorative scroll effects. No global RAF.
     const sync=()=>{if(blocked()){about.pause();return;}animations.forEach(({animation,trigger})=>animation.progress(trigger.progress));if(aboutEntered&&about.progress()<1)about.play();};
     active={sync,getState(){return {mode:desktop?'desktop':'mobile',horizontal,triggerCount:ScrollTrigger.getAll().length};}};
     status='active';reason=desktop?'desktop':'mobile';
@@ -97,5 +99,7 @@
     refresh(){if(media)ScrollTrigger.refresh();},
     getState(){return {status,reason,paused:blocked(),...(active?.getState()||{})};}
   };
-  if('requestIdleCallback' in window)requestIdleCallback(start,{timeout:900});else setTimeout(start,100);
+  // Let the browser restore reading position before ScrollTrigger's first refresh.
+  function schedule(){if('requestIdleCallback' in window)requestIdleCallback(start,{timeout:900});else setTimeout(start,100);}
+  if(document.readyState==='complete')schedule();else window.addEventListener('load',schedule,{once:true});
 })();

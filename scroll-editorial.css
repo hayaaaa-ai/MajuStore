@@ -1,13 +1,12 @@
 /* Scroll chapters extend the existing editorial identity. Static is the default. */
-.story-section{position:relative;padding:85px 5%;margin:auto;max-width:1600px}
+.story-section{position:relative;padding:85px 5%;margin:auto;max-width:1400px}
 .story-copy{max-width:590px;position:relative}
 .story-copy .eyebrow{margin-bottom:25px}
 .story-copy h2{font-size:clamp(3rem,5.8vw,6.5rem);margin-bottom:28px}
 .story-copy>p:not(.eyebrow){max-width:390px;color:var(--muted)}
-.protected-copy,.hero-copy,.section-heading,.reference-note,.contact-heading,.contact-details{position:relative;z-index:1}
+.protected-copy,.section-heading,.reference-note,.contact-heading,.contact-details{position:relative;z-index:1}
 .product-meta,.demo-tag,.view-label,.product-index{position:relative;z-index:1}
 .view-label,.product-index{position:absolute}
-.site-header{position:relative;z-index:20;background:var(--ivory)}
 .possibilities{background:var(--maju-blush);display:flex;flex-direction:column;gap:36px;border-top:1px solid var(--line);overflow:hidden;overflow:clip;padding-top:65px;padding-bottom:65px}
 .possibility-words{display:grid;grid-template-columns:1fr 1.1fr 1.8fr;width:100%;gap:24px;margin-top:10px;padding-top:32px;border-top:1px solid var(--line);align-items:baseline}
 .possibility-words>span{font-family:Georgia,serif;font-size:clamp(3rem,6.6vw,7rem);line-height:1;letter-spacing:-.065em;position:relative}
@@ -15,7 +14,7 @@
 .possibility-words>span:last-child{font-size:clamp(2.7rem,6vw,6.5rem);text-align:right}
 .possibility-words em{font-weight:400;color:var(--accent)}
 .story-bottom{display:flex;justify-content:space-between;gap:15px;font-size:.75rem;letter-spacing:.10em;position:relative;z-index:1}
-.lookbook{position:relative;margin:auto;max-width:1600px;padding:65px 0 32px;background:var(--maju-blush-light);overflow:hidden}
+.lookbook{position:relative;margin:auto;max-width:1400px;padding:65px 0 32px;background:var(--maju-blush-light);overflow:hidden}
 .lookbook-heading{padding:0 5%;display:grid;grid-template-columns:1fr 1fr;gap:12px 30px;align-items:end;margin-bottom:35px}
 .lookbook-heading .eyebrow{grid-column:1/-1}
 .lookbook-heading h2{font-size:clamp(2.8rem,4.7vw,5rem)}
@@ -40,20 +39,9 @@
 .details-story h2{font-size:clamp(2.7rem,4.8vw,5.2rem)}
 .details-story .details-note{font-size:.875rem;margin-top:22px}
 .details-story .text-link{margin-top:20px}
-.about-monogram{min-height:330px}
-.about-monogram>span{opacity:.9}
-.about-monogram small{letter-spacing:.08em;text-align:center;padding:0 15px}
-.js-ready .about-monogram.reveal{transform:none}
 .lookbook.is-horizontal .lookbook-track{display:flex;gap:24px}
 .lookbook.is-horizontal .lookbook-panel{flex:0 0 min(68vw,920px);height:clamp(270px,34vh,360px);min-height:0;padding:30px 5%;}
 .lookbook.is-horizontal .lookbook-panel>img{height:100%;width:43%}
-.fashion-footer{display:block;max-width:1600px;background:var(--ivory);overflow:hidden;padding:55px 5% 25px;border-top:1px solid var(--line)}
-.footer-top{display:flex;justify-content:space-between;gap:24px;align-items:center;position:relative;z-index:1}
-.fashion-footer p{font-size:.875rem;text-align:left;letter-spacing:.06em}
-.footer-masthead{display:block;font-family:Georgia,serif;font-size:clamp(7rem,21vw,22rem);letter-spacing:-.06em;line-height:.9;margin:45px 0 25px;color:var(--accent);text-align:center}
-.footer-masthead>span{display:block;font-family:Arial,sans-serif;font-size:.75rem;line-height:1.5;letter-spacing:.28em;margin-top:28px;color:var(--ink)}
-.footer-bottom{border-top:1px solid var(--line);padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:.75rem;letter-spacing:.06em}
-@keyframes float-piece{0%,100%{transform:translate3d(0,0,var(--depth,0px)) rotate(var(--angle,0deg)) rotateY(-2deg)}50%{transform:translate3d(0,-8px,calc(var(--depth,0px) + 4px)) rotate(calc(var(--angle,0deg) + 2deg)) rotateY(2deg)}}
 @media(max-width:1023px){
  .story-section{padding:65px 6%}.story-copy{max-width:660px}.story-copy h2{font-size:clamp(2.8rem,6.4vw,5rem)}
  .story-copy>p:not(.eyebrow){max-width:390px}
@@ -62,7 +50,6 @@
  .lookbook-panel>img{height:185px;width:100%;margin-top:18px}.panel-copy h3{margin:20px 0 14px;font-size:2rem}.panel-copy>p:not(.eyebrow){max-width:85%}.panel-copy small{margin-top:20px}.lookbook-note{margin-left:6%;margin-right:6%}
  .moment{padding-top:55px;padding-bottom:45px}.moment h2{font-size:clamp(4rem,11vw,7rem);max-width:100%}.moment-note{align-self:flex-start}
  .details-story{gap:6%}.details-type{min-height:290px}.details-type>span{font-size:clamp(2rem,4.8vw,3.5rem)}.details-type i{font-size:6rem}.details-story .story-copy>p:not(.eyebrow){max-width:100%}
-.footer-masthead{margin:50px 0 30px}
 }
 @media(max-width:599px){
  .story-copy h2{font-size:clamp(2.5rem,9vw,3.4rem);overflow-wrap:normal;letter-spacing:-.055em}.story-copy h2 em{overflow-wrap:anywhere}
@@ -71,6 +58,4 @@
  .lookbook-panel>img{height:195px;margin:0;align-self:center}.panel-copy h3{font-size:clamp(1.4rem,7vw,1.8rem);margin:16px 0}.panel-copy>p:not(.eyebrow){font-size:.8125rem;max-width:100%}.panel-copy small{font-size:.625rem;letter-spacing:0}.panel-copy .eyebrow{font-size:.75rem}
  .moment{padding-top:45px;padding-bottom:35px}.moment h2{font-size:18vw;margin:50px 0;max-width:100%}.moment .eyebrow{font-size:.6875rem}.moment-note{font-size:.8125rem}
  .details-story{display:flex;flex-direction:column;align-items:stretch;gap:40px;padding-top:55px;padding-bottom:55px}.details-type{min-height:260px;width:100%}.details-type>span{font-size:2.6rem}.details-type i{font-size:5rem}.details-story .story-copy>p:not(.eyebrow){max-width:100%}
- .about-monogram{min-height:270px}
- .fashion-footer{padding:40px 6% 22px}.footer-top{display:block}.fashion-footer .footer-links{justify-content:flex-start;margin-top:20px;gap:8px 20px}.fashion-footer .footer-links .text-link{font-size:.8125rem}.fashion-footer p{font-size:.8125rem}.footer-masthead{font-size:24vw;letter-spacing:-.05em;margin:45px 0 25px}.footer-masthead>span{font-size:.625rem;letter-spacing:.15em;margin-top:20px}.footer-bottom{font-size:.625rem;gap:10px;align-items:center}.footer-bottom .text-link{font-size:.75rem;white-space:nowrap}
 }

@@ -18,8 +18,11 @@
   instagram.highlights.forEach(name=>document.querySelector('.instagram-themes').append(el('li',null,name)));
   const readySellers=sellers.filter(seller=>seller.numberFormatConfirmed);
   const sellerMetric=document.querySelector('[data-seller-metric]');sellerMetric.hidden=!readySellers.length;sellerMetric.querySelector('strong').textContent=String(readySellers.length);
-  const address=data.business.address,addressBlock=document.querySelector('[data-store-address]');
-  [`${address.street}, ${address.number}`,`${address.district} · ${address.city} – ${address.state}`,`CEP ${address.postalCode}`].forEach((line,i)=>{if(i)addressBlock.append(document.createElement('br'));addressBlock.append(document.createTextNode(line));});
+  const address=data.business.address;
+  document.querySelectorAll('[data-store-address]').forEach(addressBlock=>{
+    [`${address.street}, ${address.number}`,`${address.district} · ${address.city} – ${address.state}`,`CEP ${address.postalCode}`].forEach((line,i)=>{if(i)addressBlock.append(document.createElement('br'));addressBlock.append(document.createTextNode(line));});
+  });
+  document.querySelector('[data-current-year]').textContent=String(new Date().getFullYear());
   document.querySelector('[data-general-phone]').prepend(document.createTextNode(data.business.whatsapp.display));
   const reference=data.products.find(item=>item.id==='dress');
   const referenceImage=el('img');referenceImage.src=reference.image;referenceImage.width=720;referenceImage.height=1080;referenceImage.loading='lazy';referenceImage.decoding='async';referenceImage.alt=`Referência visual de ${reference.name.toLocaleLowerCase('pt-BR')} — imagem demonstrativa`;
@@ -27,12 +30,22 @@
   const sellerSection=document.querySelector('#atendimento');sellerSection.hidden=!sellers.length;
   if(sellers.length)document.querySelector('[data-seller-intro]').textContent=`Prefere atendimento direto? ${sellers.map(seller=>seller.name).join(' e ')} estão por aqui.`;
   const sellerGrid=document.querySelector('.seller-grid'),footerSellers=document.querySelector('.footer-sellers');footerSellers.hidden=!readySellers.length;
+  function portrait(seller,eager=false,sizes='(max-width: 599px) 88vw, (max-width: 999px) 44vw, 400px'){
+    const image=el('img');image.src=seller.photo;image.srcset=seller.photoSmall+' 320w, '+seller.photo+' 512w';image.sizes=sizes;
+    image.alt='Retrato de '+seller.name+', atendimento da Maju Store';image.width=512;image.height=640;image.loading=eager?'eager':'lazy';image.decoding='async';if(eager)image.fetchPriority='high';return image;
+  }
+  document.querySelectorAll('[data-team-portrait]').forEach(figure=>{
+    const seller=sellers.find(person=>person.id===figure.dataset.teamPortrait);
+    if(!seller){figure.hidden=true;return;}
+    figure.querySelector('.portrait-frame').append(portrait(seller,figure.hasAttribute('data-priority-portrait'),'(max-width: 599px) 88vw, (max-width: 999px) 42vw, 480px'));
+    figure.querySelector('[data-portrait-caption]').textContent=seller.name+' · Atendimento';
+  });
   sellers.forEach((seller,index)=>{
     const card=el('article','seller-card');card.dataset.seller=seller.id;
     // CONFIRMAR AUTORIZAÇÃO COMERCIAL PARA PUBLICAÇÃO DA FOTO, NOME E TELEFONE.
     if(seller.photo){
-      const portrait=el('div','seller-portrait'),image=el('img');image.src=seller.photo;image.alt=`Retrato de ${seller.name}, atendimento da Maju Store`;image.width=512;image.height=640;image.loading='lazy';image.decoding='async';
-      const number=el('span','seller-index',String(index+1).padStart(2,'0'));number.setAttribute('aria-hidden','true');portrait.append(image,number);card.append(portrait);
+      const portraitFrame=el('div','seller-portrait'),image=portrait(seller);
+      const number=el('span','seller-index',String(index+1).padStart(2,'0'));number.setAttribute('aria-hidden','true');portraitFrame.append(image,number);card.append(portraitFrame);
     }
     const body=el('div','seller-body'),meta=el('div','seller-meta');meta.append(el('p','eyebrow',seller.role),el('h3',null,seller.name),el('p','seller-phone',seller.numberFormatConfirmed?seller.display:'Contato direto em confirmação'));
     let cta;
